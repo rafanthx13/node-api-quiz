@@ -8,6 +8,7 @@
 + Com tipagem + eslint vocÊ evit acom que chame um aributo errado e só der erro na hora de compilar. Ex: Se for http.statusCode, mas vocÊ coloca http.stataus code, só vai dar erro na hora de compilar. Agora se esse stats code diver tipado, ele vai verificar que essa propriedade nao existe e vai acusar
   - Como resolver? Crie intreface para as coisa spassads por parametros
 + Se vocÊ faz tipagem pra tudo, entao praticamente vocÊ personaliza tanta coisa que a leitura do código fica direta
++ Se você faz `imlements EmailValidator` ele vai criar a linha de Import. Isso funciona por causa da tipagem e do watch do VSCOde. Entao agiliza a improtar as coisas, é só chamalas que ele vai la e chama a linha IGUAL AO JAVA
 
 Exemplo: ANTES
 

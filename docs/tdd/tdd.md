@@ -32,6 +32,18 @@ Flag --watch: vigiar e faz reload
 
 --passWithNoTests : o jest vai passar se na hpuver nenhum testse
 
+
+
+**mockar retorno de método**
+
+De preferencia o seu mock deve retonrar valores que nao dee erro. Aí, quando voce precisa dele para retornar algum eror, voce vai ter que modificalos, omco na linha abaixo
+
+```
+jest.spyOn(emailValidator, 'isValid').mockReturnValueOnce(false) // vamos mockar para que esse validator vai voltar, aqui, somente  false aqui
+```
+
+
+
 ## ESLINT
 
 ### 1
