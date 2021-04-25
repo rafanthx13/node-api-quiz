@@ -5,6 +5,23 @@
 + Programação orientada a objetos permite aplicar Design Patters: que usam classe e interfaces
 + Garante que o Java script rode como Java, com tipagem e assim garante que não seja uma zona como python de tipagem dinâmica.
 + É uma dependência de DEV, pois no fim será somente java-script
++ Com tipagem + eslint vocÊ evit acom que chame um aributo errado e só der erro na hora de compilar. Ex: Se for http.statusCode, mas vocÊ coloca http.stataus code, só vai dar erro na hora de compilar. Agora se esse stats code diver tipado, ele vai verificar que essa propriedade nao existe e vai acusar
+  - Como resolver? Crie intreface para as coisa spassads por parametros
++ Se vocÊ faz tipagem pra tudo, entao praticamente vocÊ personaliza tanta coisa que a leitura do código fica direta
+
+Exemplo: ANTES
+
+if (!httpRequest.body.name) {
+      return { STATUScODE: 400, error: new MissingParamError('name') }
+    }
+
+
+EXMEPLOD DEPOIES
+
+if (!httpRequest.body.name) {
+      return badRequest(new MissingParamError('name') )   
+    }
+
 
 ## Adicionar Type Script
 
