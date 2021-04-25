@@ -34,6 +34,14 @@ Flag --watch: vigiar e faz reload
 
 ## ESLINT
 
+### 1
+
 "@typescript-eslint/strict-boolean-expressions": "off",
 
 + PERMITE QUE  FAÇAMOS `if (!httpRequest.body.name)`
+
+### 2
+
+Se tiver tando muito erro use CTRL+SHIF+P: 
+
+ESLINT: Fix all auto-fixable erros
