@@ -1,6 +1,5 @@
 import { SignUpController } from './signup'
-import { MissingParamError } from '../errors/missing-param-error'
-import { InvalidParamError } from '../errors/invalid-param-error'
+import { MissingParamError, InvalidParamError, ServerError } from '../errors/'
 import { EmailValidator } from '../protocols/email-validator'
 
 interface SutTypes {
@@ -8,10 +7,9 @@ interface SutTypes {
   emailValidatorStub: EmailValidator
 }
 
-// Factory
-// Serve para centralizar as mudançar em apenas um lugar
-const makeSut = (): SutTypes => {
-  // Mock (simulado)
+// Factury para emial validator
+const makeEmailValidator = (): EmailValidator => {
+// Mock (simulado)
   // Stub significa 'duble', é o mock que retorna algo hard-code
   // Outros Mocks: Spy, Fake, Stub
   class EmailValidatorStub implements EmailValidator {
@@ -20,7 +18,27 @@ const makeSut = (): SutTypes => {
     }
   }
 
-  const emailValidatorStub = new EmailValidatorStub()
+  return new EmailValidatorStub()
+}
+
+// Factury para emial validator
+const makeEmailValidatorWithError = (): EmailValidator => {
+  // Mock (simulado)
+  // Stub significa 'duble', é o mock que retorna algo hard-code
+  // Outros Mocks: Spy, Fake, Stub
+  class EmailValidatorStub implements EmailValidator {
+    isValid (email: string): boolean {
+      throw Error()
+    }
+  }
+
+  return new EmailValidatorStub()
+}
+
+// Factory
+// Serve para centralizar as mudançar em apenas um lugar
+const makeSut = (): SutTypes => {
+  const emailValidatorStub = makeEmailValidator()
   const sut = new SignUpController(emailValidatorStub)
   return {
     sut,
@@ -86,7 +104,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new MissingParamError('passwordConfirmation'))
   })
 
-  test('Should return 400 if no passwordConfirmation is provided', () => {
+  test('Should return 400 if no an invalid email is provided', () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false) // vamos mockar para que esse validator vai voltar, aqui, somente  false aqui
     const httpRequest = {
@@ -101,5 +119,40 @@ describe('SignUp Controller', () => {
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamError('email'))
+  })
+
+  test('Should call EmailValidator with correct email', () => {
+    // garantir que va com o email mesmo que pasasmos
+    const { sut, emailValidatorStub } = makeSut()
+    // Eu capturar o retorno desse isValid
+    const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@mail.com',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+
+      }
+    }
+    sut.handle(httpRequest)
+    expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com')
+  })
+
+  test('Should return 500 if emailValidator throws an Exception', () => {
+    const emailValidatorStub = makeEmailValidatorWithError()
+    const sut = new SignUpController(emailValidatorStub)
+
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_email@mail.cmom',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 })

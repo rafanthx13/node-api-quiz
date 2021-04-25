@@ -7,9 +7,11 @@
 #### SOLID
 
 * Single Responsibility Principle (SRP)
+  * Muitos arquivos, cada um pequeno, mas cada um cuida de uma coisa separada.
 * Open Closed Principle (OCP)
 * Liskov Substitution Principle (LSP)
 * Interface Segregation Principle (ISP)
+  * INTERFACE PRA TUDO. É criar interfaces como se fosse metodos a srerem adicionados numa classe a meidida que precisar dele. S eprecisar cahama, se nao, nao cahama. Assim há bastante reproveitamento. EX: se vocE faz uma unica funcionalidade (que muda uma classe) fica ruim, o bom seria criar uma iinterfaces. AI, se vocÊ chamar em outro lugar basta so implementatla
 * Dependency Inversion Principle (DIP)
   * Em suma é dependender de abstraçôes (INTERFACE) ao invez de impleemntaçao (CLASSE DIRETA)
   * Ex: Ao invez de chamar o Express do Node, vocÊ chama uma classe que tem uma interface e nedtor da sua implementaçao chama o Express. Assim se vocÊ quiser mudar de Expres ara outra coisa, vocÊ somente muda o corpo dessa classe, mas nada de quem manda
@@ -29,7 +31,7 @@
 > ## Design Patterns
 
 * Factory:
-  * Se algo é usado em vários lugares, ao invez de chamar toda hora, voc~E centraliza a criaçÂo do objeto no inicio e o reutilzia em vários casos. Assi evita ter criaçÂod e objeto a todo momento
+  * Se vocÊ cria um mesmo objeto taoda hora, seria interressante criar um metodo que o cria. Ele é uma fabrica. Assim se quiser mudar todos eles ao mesmo tmepo, basta mudar a FACTORY
 * Adapter
   * É uma classe que implementa uma interface global, e dentro dela chama uma lib extena. Essa classe é usada numa main. Assim, se eu quiser mudar de lib eu nao mexo na main e sim somente nessa classe, já que ela é obrigada a implemnetar a interface, entao é so o corpo dos metodos e a chamada das libs
 * Composite
