@@ -2,5 +2,9 @@
     "extends": "standard-with-typescript",
     "parserOptions": {
       "project": "./tsconfig.json" // apontar para o nosso arquivo de configura
+    },
+    "rules": {
+      "@typescript-eslint/strict-boolean-expressions": "off",
+      "@typescript-eslint/camelcase": "off"
     }
   }

@@ -26,3 +26,14 @@ describe('SignUp Controller', () => {
   })
 ```
 
+## JEST
+
+Flag --watch: vigiar e faz reload
+
+--passWithNoTests : o jest vai passar se na hpuver nenhum testse
+
+## ESLINT
+
+"@typescript-eslint/strict-boolean-expressions": "off",
+
++ PERMITE QUE  FAÇAMOS `if (!httpRequest.body.name)`

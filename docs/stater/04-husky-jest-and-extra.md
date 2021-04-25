@@ -6,6 +6,8 @@ Permite que agente defina comando para serem executados antes dos nosso commits.
 
 Ex: Se algum arquivo estiver com problema de formatação, agente coloca o husky para bloquear o commit por esta tendo problemas de formatação
 
+**USE HUSKY VERSÃO `"husky": "^4.2.5",`**
+
 ```
 npm i -D husky
 ```

@@ -116,3 +116,8 @@ correct format: <type>[scope]: <subject>
 
 ```
 
+## Sair do `END`
+
+Se você fizer `git l` e mostrar muita coisa na tela, no final, haverá os caracters `END` que vai travar tudo e não vai ter como sair com `CTRL+C`.
+
+Para sari aperte `'q' ou'z'`
