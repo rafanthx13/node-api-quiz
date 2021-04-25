@@ -1,6 +1,60 @@
-# **Clean Node API**
+# My Clean Node API
 
-[![alt text](./public/img/logo-course.png "Link para o treinamento")](https://www.udemy.com/course/tdd-com-mango/?referralCode=B53CE5CA2B9AFA5A6FA1)
+
+
+## Libs e dependências
+
+* NPM: pacote gerenciardo de modulos jode
+
+* Typescript: Super Set do javaScript
+
+* Git: Ferramenta de versionamento
+
+* Jest: Testes em JavaScript/TypeScript (global e local)
+
+* Standard Javascript Style: Padrâo de escrita do JS nesse projeto
+
+* Husky: Executar comandos antes de commita (validador de commits)
+
+* Npm Check: Verificador de dependencias (instaldo global)
+
+* Eslint: Avaliador de sintaxe JS para manter padrao
+
+* Lint Staged: O mesmo que o Eslin mas que executa em somente os arquivos no staged-area do git (isso evita fazer eslint de arquivo que nao foram modificados)
+
+* git-commit-msg-linter: Serve para garantir que os commit sigam o pdrao conventional commits
+
+  
+
+* 
+
+
+
+
+
+* MongoDb
+* Travis CI
+* Swagger
+* Bcrypt
+* JsonWebToken
+* Faker
+* Coveralls
+* Validator
+* Express
+* Apollo Server Express
+* Graphql
+* Graphql ISO Date
+* Supertest
+* Sucrase
+* Nodemon
+* Rimraf
+* In-Memory MongoDb Server
+* MockDate
+* Module-Alias
+* Copyfiles
+* Bson ObjectId
+
+# **Clean Node API**
 
 ---
 
