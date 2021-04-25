@@ -1,0 +1,268 @@
+atalhos no git
+
+> git config --list
+  => Mostra todos os atalhos do git
++ --system: git para toda e qualque usuario
++ --local: para somente o projeto
++ --global: para seu usuario ara qualquer projeto
+
+Editor VI (VIAI)
+
+EDITAR ARQUIVO DE CONFIGURAÇÔES DO GIT
+
+> git config --global core.editor code
+
+Para editar meus atalhis
+
+> git config --global --edit
+
+coloque --wait no seu editor assim a linha va ficar
+
+editor = code --wait
+
+é para o git carregar as informaçoes corretamnete
+
+````
+[alias]
+	s = !git status -s
+	c = !git add --all && git commit -m 
+	l = !git log --pretty=format:'%C(blue)%h%C(red)%d %C(white)%s - %C(cyan)%cn, %C(green)%cr'
+````
+
++ s
+  => Vai motrar de forma reumida
+  => $ git s
++ c
+  => vai fazer o add + commit numa mesma linha
+  => $ git c "re"
++ l
+  => Vai mostrar o log de forma resuminda com só as informaçoes interressante de forma a ocupar menos espaço
+  => $ git l
+
+## Como e quando faze rum commit
+
+https://www.conventionalcommits.org/en/v1.0.0/
+
+Vamos usar <type>: feat, fix, chore (quadno add dependencia), docs, style ..
+
+DICAS
++ não use letra maiuscula a nao ser em nome de classe
++ Sem pobtuçaçao
++ Começa com verbo e verbo no rperesnet
+
+Assim, por exmeplo vai começar com 
+
+git c "chore: add npm"
+
+lib: git-commit-msg-linter
++ Vai garantir que meus commits vao respeitar essa diretriz
++para evitar commits fora do padrao
+
+Dependencia de deesnvolvimento (-D)
+typescript @types/node
+
+TypeScript serve por seguranaça, pois o JS é igual a python, qualquer cosisa roda
+
+
+no arquivo ts
+````
+{
+  "compilerOptions": {
+    "outDir": "dist", //onde queremos gerar nosso java-script
+    "module": "commonjs", // vamos usar o import e export para importar e exportar nesse formato
+    "target": "es2019", // para gerar com padrao do es2019. que pertmite coisas como o condicionl ?, assim, o javascript gerado do ? sertamente tera suporte para o ?
+    "esModuleInterop": true, // converter os modeolos
+    "sourceMap": true,
+    "rootDirs": ["src", "tests"],
+    "baseUrl": "src",
+    "paths": {
+      "@/tests/*": ["../tests/*"],
+      "@/*": ["*"]
+    }
+  },
+  "include": ["src", "tests"],
+  "exclude": []
+}
+````
+
+GIT IGNORE
+
+````
+node_modules/
+dist
+````
+
+git c "chore: add typescript"
+
+## Vamos usar ESLIT
+
+E vamos colocar um monte de plugins pois queremos usar o JS stand Style, mas como nosos projeto é em Type, precisamos de várias dependencias
+
+````
+npm install --save-dev eslint@7 eslint-plugin-promise@4 eslint-plugin-import@2 eslint-plugin-node@11 @typescript-eslint/eslint-plugin@4 eslint-config-standard-with-typescript
+
+## Vantagens de TypeScript
+
++ Interface o que permite fazer design pattersn
+````
+
+## Estenxoes vdo visaul code
+
++ ESLint
++ Desativar plugin Standardjs
+
+ARQUIVO .ESLINT.JSON
++ Estamos dizendo que é apra usar type-script
++ extends
+````
+{
+  "extends": "standard-with-typescript",
+  "parserOptions": {
+    "project": "./tsconfig.json" // apontar para o nosso arquivo de configura
+  }
+}
+````
+
+criar eslint.ignore
++ Para ignorar essas pastas
+`````
+node_modules
+dist
+````
+
+## Juntando meu commit com o anteiorr
+
+$ git l
+
+$ git commit --amend --no-edit
++ ammend: adaicionar ao commit anterior
++ no-edit: nao abrir o editor para editar a mensagem
++ Assim eu junto commits e evito repetir outra coisa
+
+## Husky
+
+Permite que agente defina comando para serem executados antes dos nosso commits.
+
+Ex: Se algum arquivo estiver com problema de formataçaô, agente coloca o husky para bloquear o commti por esta tendo problemas de formataçao
+
+npm i -D husky
+
+.husky.json
++ Vou executar eslin antes do commit
+````
+{
+	"hooks": {
+		"pre-commit": "lint-staged"
+	}
+}
+````
+
+PROBLEMA DO HUSKY: ele vai executar em todos os arquivos a cada commit, até mesmo em arquivo que nao foram modificados. Pra resolver isos vamos adicionar outra dependendica
+
+.lintstagedrc.json
++ Vo executar nos arquivos typescript o eslint na pasta srcr
+````
+{
+	"*ts":
+		"eslint 'src/**' --fix",
+		"npm run test:staged", // vai rodar nosso teste de forma separada. Assim nao vai passar commit com teste falhando
+		// "git add" // o lint-staged na versoa 10 ja faz automaticamente git add, enao nao use pois vao dar warning
+}
+
+````
+
+em pacakge.sjon adiciona "test:staged: "jest"
+
+npm i -D lint-staged
++ permite que eu rode arquivos em somnete no estaged area
++ Assim o husky nao vai rodar em todos os arquivo se somente você criar um unico arquvo nodo. Isso
+
+## testse 
+
+npm i -D jest @types/jest ts-jest
+
+jest: testse de js
+ts-jest: jest par atypescript
+
+depois eu rodo
+
+jest --init
++ digo yes; mnode; yes;no
++ 1. yes: substituir o test do pacakge.json
+2. projetjo node?
+3. covarge reports? yws
+4. no
+
+modeule.exports = {
+	roots: ['<rootDir>/src']
+	collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+	coverageDirectory: 'coverage',
+	testEnvironment: 'node',
+	transform: {'.+\\.ts$': 'ts-jest'},
+	
+}
+
+## Como realizar testse:
+
+SITE: npm test
+
+=========
+
+# Aruitetura do sistema
+
+draw.io
+
+Utilizresmos:
++ express, mongodb, bcrypt, validator
+
+Vamos criar uma arquitetura desacoplada. Dessa forma, susas claasse nao vao precisar tanto de sertos pacotes e sera mais fácil fazer torcar e manuntetaçao
+
+**Desgin Patters: Adapter**
++ Adaptador de interfaces: 
++ Nosso controler deverá ter resquest e responses personalizados
+
+No nosso caodito, havera uma interface chamada controller, e o meu adapter aponta para um controller. E é o meu adapter que vai impelementar o express.
+
+Assim, se eu quiser trocar meu Express por outro, só vou precisar mexer na classe "ExpressRouteAdapter"
+
+**Em suma como implementar um Adapter"
++ SituaçÂo/Problema: Minha classe (chamaremos de main) depende de uma lib externa que pode ser trocada, como fazer isso sem alterar essa classe?
+  - Fazemos isso atraves do adpater: Essa classe que queremos por uma lib nâo vai por ela. Nos criamos outra classe, uma Adapter que vai implementar essa lib.
+  - E ai, na classe adapter vamos chamar a lib.
+  - a classe main nao vai puxar adapter, e sim uma interface que sera implementada no adapters
+  - Assim, eu poderia trocar de lib apenas trocando classes que utilizem uma mesma interface
+  - Assim, implementando Adapter, a nossa classe mainnao precisa de nenhuma modificaçâo, apenas chamar classe que implementam uma interface
+
+Area de DOMAON: Regras de negocios, funcionalidade
+
+Data: Onde executa coisas de BD
+
+## Problemas de Jest ao  fazer recctor
+
+jest --clearCache
+
+ vai limapr o cache, e isso corrigi o caso de o jest esta procurando um arquivo para fazer tetse que nao existe
+
+## EXTENSAO RELAOD DO VSCODE
+
+##  NPM-CHECK
+
+npm i -g npm-check
++ Serve para verificar dependencias, e com ela, ela permite agente atualizar so aquelas que quqermeos
+
+Com
+
+$ npm-check -s -u
+
+abre uma interface e agente pode atualizar as bibliotecas que quremos de forma intrativao, escolhendo uma a uma
+
+ATUALIZA TODAS MENOS  es-lint-config-standard-with-typescript, essa deixa 11.0.1
+
+Recomenda rpdar essa lib duas vezes
+
+
+==========
+
+
+$ git init
+$ npm init -y
