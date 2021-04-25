@@ -17,7 +17,7 @@ $ npm install --save-dev eslint@7 eslint-plugin-promise@4 eslint-plugin-import@2
 
 ## Configurando ESLint
 
-### Arquivo de Configuração `.eslint.json`
+### Arquivo de Configuração `.eslintrc.json`
 
 ````json
 {

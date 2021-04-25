@@ -16,25 +16,18 @@ $ npm i -D typescript @types/node
 
 ```json
 {
-  "compilerOptions": {
-    "outDir": "dist", 
-      //onde queremos gerar nosso java-script
-    "module": "commonjs", 
-      // vamos usar o import e export para importar e exportar nesse formato
-    "target": "es2019", 
-      // para gerar com padrao do es2019. que pertmite coisas como o condicionl ?
-    "esModuleInterop": true, 
-      // converter os modeolos
-    "sourceMap": true,
-    "rootDirs": ["src", "tests"],
-    "baseUrl": "src",
-    "paths": {
-      "@/tests/*": ["../tests/*"],
-      "@/*": ["*"]
+    "compilerOptions": {
+      "outDir": "./dist", 
+        //onde queremos gerar nosso java-script
+      "module": "commonjs", 
+        // vamos usar o import e export para importar e exportar nesse formato
+      "target": "es2019", 
+        // para gerar com padrao do es2019. que pertmite coisas como o condicionl ?
+      "esModuleInterop": true, 
+        // converter mais coisas, é importante
+      "allowJs": true,
+      // permitir ter arquivos js normais
     }
-  },
-  "include": ["src", "tests"],
-  "exclude": []
-}
+  }
 ```
 

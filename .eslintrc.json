@@ -1,0 +1,6 @@
+{
+    "extends": "standard-with-typescript",
+    "parserOptions": {
+      "project": "./tsconfig.json" // apontar para o nosso arquivo de configura
+    }
+  }

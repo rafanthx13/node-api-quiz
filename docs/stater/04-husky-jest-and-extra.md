@@ -7,10 +7,10 @@ Permite que agente defina comando para serem executados antes dos nosso commits.
 Ex: Se algum arquivo estiver com problema de formatação, agente coloca o husky para bloquear o commit por esta tendo problemas de formatação
 
 ```
-$ npm i -D husky
+npm i -D husky
 ```
 
-`.husky.json`
+`.huskyrc.json`
 
 + Vou executar eslint antes do commit
 ````
@@ -21,7 +21,7 @@ $ npm i -D husky
 }
 ````
 
-PROBLEMA DO HUSKY: ele vai executar em todos os arquivos a cada commit, até mesmo em arquivo que não foram modificados. Pra resolver isso vamos adicionar outra dependência
+PROBLEMA DO HUSKY: ele vai executar em todos os arquivos a cada commit, até mesmo em arquivo que não foram modificados. Pra resolver isso vamos usa um outro eslint, o lint-staged. Ele permite que rode nos arquivos que estejam na staged area
 
 `.lintstagedrc.json`
 
@@ -49,17 +49,23 @@ $ npm i -D lint-staged
 ## Jest: Em TypeScript
 
 ```
-$ npm i -D jest @types/jest ts-jest
+npm i -D jest @types/jest ts-jest
 ```
 
 + `jest`: testes de js
 + `@types/jest`
 + `ts-jest`: jest para typescript
 
-depois eu único o jest:
+depois eu inicializo o jest:
+
+Instale global com
+
+`npm install jest --global`
+
+inicializnado
 
 ```
-$ jest --init
+jest --init
 ```
 
 + 1 - yes: substituir o teste do `package.json`
@@ -67,7 +73,7 @@ $ jest --init
 + 3 - coverage reports? yes
 + 4 - no
 
-### Arquivo de configuração do jest `jest.config.json`
+### Arquivo de configuração do jest `jest.config.js`
 
 ```json
 modeule.exports = {
