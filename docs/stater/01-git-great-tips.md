@@ -85,4 +85,4 @@ $ npm i -D git-commit-msg-linter
 ```
 
 + Vai garantir que meus commits vão respeitar a diretriz do **conventional commits**
-+ para evitar commits fora do padrão..
++ para evitar commits fora do padrão...
