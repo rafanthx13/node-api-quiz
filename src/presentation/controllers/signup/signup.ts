@@ -11,7 +11,7 @@ export class SignUpController implements Controller {
     this.addAccount = addAccount
   }
 
-  handle (httpRequest: HttpRequest): HttpResponse {
+  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       // A medida que nâo tiver algum dado, vai gerar um MissingPramError
       const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
@@ -28,7 +28,7 @@ export class SignUpController implements Controller {
       if (!isValid) {
         return badRequest(new InvalidParamError('email'))
       }
-      const account = this.addAccount.add({
+      const account = await this.addAccount.add({
         name, email, password
       })
       return ok(account)
